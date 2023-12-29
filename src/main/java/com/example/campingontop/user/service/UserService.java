@@ -1,6 +1,5 @@
 package com.example.campingontop.service;
 
-import com.example.campingontop.model.Member;
 import com.example.campingontop.model.dto.PostMemberDto;
 import com.example.campingontop.repository.MemberRepository;
 import org.springframework.stereotype.Service;

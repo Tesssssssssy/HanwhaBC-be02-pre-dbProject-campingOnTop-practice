@@ -1,4 +1,4 @@
-package com.example.campingontop.model.dto;
+package com.example.campingontop.accomodation.model.response;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GetAccomodationDto {
+public class GetFindAccomodationDto {
     private Integer id;
 
     // private Integer user_id;
@@ -25,8 +25,8 @@ public class GetAccomodationDto {
 
     private Integer max_user;
 
-    private Integer hasAirConditioner;
-    private Integer hasWashingMachine;
+    private Integer has_airConditioner;
+    private Integer has_washingMachine;
 
     private Date register_time;
 }

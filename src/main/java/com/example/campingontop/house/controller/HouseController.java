@@ -1,6 +1,6 @@
-package com.example.campingontop.controller;
+package com.example.campingontop.accomodation.controller;
 
-import com.example.campingontop.model.dto.PostAccomodationDto;
+import com.example.campingontop.accomodation.PostAccomodationDto;
 import com.example.campingontop.service.AccomodationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

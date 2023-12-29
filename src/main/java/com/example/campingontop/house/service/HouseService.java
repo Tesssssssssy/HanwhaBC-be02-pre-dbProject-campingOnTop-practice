@@ -1,7 +1,9 @@
 package com.example.campingontop.service;
 
 import com.example.campingontop.model.Accomodation;
-import com.example.campingontop.model.dto.PostAccomodationDto;
+import com.example.campingontop.accomodation.PostAccomodationDto;
+import com.example.campingontop.model.enums.hasAirConditioner;
+import com.example.campingontop.model.enums.hasWashingMachine;
 import com.example.campingontop.repository.AccomodationRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +25,8 @@ public class AccomodationService {
                         .max_user(postAccomodationDto.getMax_user())
                         .price(postAccomodationDto.getPrice())
                         .img(postAccomodationDto.getImg())
-                        .hasAirConditioner(postAccomodationDto.getHasAirConditioner())
-                        .hasWashingMachine(postAccomodationDto.getHasWashingMachine())
+                        .has_AirConditioner(hasAirConditioner.valueOf(postAccomodationDto.getHas_airConditioner()))
+                        .has_WashingMachine(hasWashingMachine.valueOf(postAccomodationDto.getHas_washingMachine()))
                 .build());
     }
 }
