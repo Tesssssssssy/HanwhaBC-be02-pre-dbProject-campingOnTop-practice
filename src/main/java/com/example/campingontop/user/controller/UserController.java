@@ -1,27 +1,32 @@
 package com.example.campingontop.user.controller;
 
+import com.example.campingontop.house.service.HouseService;
 import com.example.campingontop.user.model.request.PostCreateUserDtoReq;
 import com.example.campingontop.user.model.response.GetFindUserDtoRes;
 import com.example.campingontop.user.model.response.PostCreateUserDtoRes;
 import com.example.campingontop.user.service.UserService;
+import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
-@Tag(name="User",description = "User 유저 CRUD")
+@Tag(name="User", description = "User CRUD")
+@Api(tags = "User")
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {
-    private final Logger log = LoggerFactory.getLogger(UserController.class);
+    private final Logger log = LoggerFactory.getLogger(HouseService.class);
     private UserService userService;
 
     public UserController(UserService userService) {

@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicInsert;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
