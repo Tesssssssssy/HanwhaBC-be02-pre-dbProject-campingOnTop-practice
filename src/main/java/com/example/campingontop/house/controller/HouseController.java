@@ -5,6 +5,7 @@ import com.example.campingontop.house.model.response.GetFindHouseDtoRes;
 import com.example.campingontop.house.model.response.PostCreateHouseDtoRes;
 import com.example.campingontop.house.service.HouseService;
 import com.example.campingontop.user.model.response.GetFindUserDtoRes;
+import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,14 +17,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
-@Tag(name="House",description = "House 숙소 CRUD")
+@Tag(name="House", description = "House 숙소 CRUD")
+@Api(tags = "House")
 @RestController
 @RequestMapping("/api/v1/house")
 public class HouseController {
-    private final Logger log = LoggerFactory.getLogger(HouseController.class);
+    private final Logger log = LoggerFactory.getLogger(HouseService.class);
     private HouseService houseService;
 
     public HouseController(HouseService houseService) {
@@ -52,6 +55,4 @@ public class HouseController {
         GetFindHouseDtoRes response = houseService.findHouseById(houseId);
         return ResponseEntity.ok().body(response);
     }
-
-
 }
