@@ -4,9 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-src/main/resources/*.properties
-src/main/resources/*.yml
-src/main/resources/*.html
+*.properties
+*.xml
+
+log
 
 ### STS ###
 .apt_generated

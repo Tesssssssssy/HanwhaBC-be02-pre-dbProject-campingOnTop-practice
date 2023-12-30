@@ -1,8 +1,5 @@
-package com.example.campingontop.accomodation;
+package com.example.campingontop.house.model.request;
 
-import com.example.campingontop.model.enums.hasAirConditioner;
-import com.example.campingontop.model.enums.hasWashingMachine;
-import com.example.campingontop.model.enums.isActive;
 import lombok.*;
 
 @Getter
@@ -10,7 +7,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PatchAccomodationDto {
+public class PatchUpdateHouseDtoReq {
+    private Long id;
+
     private String name;
     private String content;
     private Integer price;
@@ -22,8 +21,7 @@ public class PatchAccomodationDto {
 
     private Integer max_user;
 
-    private isActive is_active;
-
-    private hasAirConditioner has_airConditioner;
-    private hasWashingMachine has_washingMachine;
+    private Boolean isActive;
+    private Boolean hasAirConditioner;
+    private Boolean hasWashingMachine;
 }

@@ -1,10 +1,16 @@
-package com.example.campingontop.repository;
+package com.example.campingontop.house.repository;
 
-import com.example.campingontop.model.Accomodation;
+import com.example.campingontop.house.model.House;
+import com.example.campingontop.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface AccomodationRepository extends JpaRepository<Accomodation, Integer> {
+import java.util.Optional;
 
+@Repository
+public interface HouseRepository extends JpaRepository<House, Long> {
+    public Optional<House> findByName(String name);
+
+    @Override
+    public Optional<House> findById(Long id);
 }

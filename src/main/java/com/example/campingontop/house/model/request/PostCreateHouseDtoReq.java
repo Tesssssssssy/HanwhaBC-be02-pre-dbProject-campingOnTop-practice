@@ -1,9 +1,10 @@
 package com.example.campingontop.house.model.request;
 
-import com.example.campingontop.enums.IsActive;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 
 @Getter
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PostCreateHouseDto {
+public class PostCreateHouseDtoReq {
     private String name;
     private String content;
     private Integer price;
@@ -21,14 +22,8 @@ public class PostCreateHouseDto {
     private String latitude;
     private String longitude;
 
-    @Max(10)
     private Integer max_user;
 
-
-    private IsActive is_active;
-
-    private String has_washingMachine;
-    private String has_airConditioner;
-
-    private LocalDateTime register_time;
+    private Boolean hasAirConditioner;
+    private Boolean hasWashingMachine;
 }

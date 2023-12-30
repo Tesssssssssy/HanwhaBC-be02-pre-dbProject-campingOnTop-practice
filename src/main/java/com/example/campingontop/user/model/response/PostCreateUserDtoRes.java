@@ -1,7 +1,13 @@
 package com.example.campingontop.user.model.response;
 
+import com.sun.istack.NotNull;
+import io.swagger.annotations.ApiParam;
 import lombok.*;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -9,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GetFindUserDtoRes {
+public class PostCreateUserDtoRes {
     private Long id;
     private String email;
     private String name;
@@ -18,5 +24,4 @@ public class GetFindUserDtoRes {
     private Boolean gender;
     private String birthDay;
     private Date createdAt;
-    private Date updatedAt;
 }

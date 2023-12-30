@@ -2,6 +2,7 @@ package com.example.campingontop.house.model.response;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -9,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GetFindHouseDtoRes {
+public class PostCreateHouseDtoRes {
     private Long id;
 
     // private Integer user_id;
@@ -27,4 +28,6 @@ public class GetFindHouseDtoRes {
 
     private Boolean hasAirConditioner;
     private Boolean hasWashingMachine;
+
+    private Date createdAt;
 }

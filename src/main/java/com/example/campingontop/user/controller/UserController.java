@@ -1,38 +1,53 @@
-package com.example.campingontop.controller;
+package com.example.campingontop.user.controller;
 
-import com.example.campingontop.model.dto.PostMemberDto;
-import com.example.campingontop.service.MemberService;
+import com.example.campingontop.user.model.request.PostCreateUserDtoReq;
+import com.example.campingontop.user.model.response.GetFindUserDtoRes;
+import com.example.campingontop.user.model.response.PostCreateUserDtoRes;
+import com.example.campingontop.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.slf4j.Slf4j;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Tag(name="Member",description = "Member 유저 CRUD")
-@Slf4j
+@Tag(name="User",description = "User 유저 CRUD")
 @RestController
-@RequestMapping("/api/v1/member")
-public class MemberController {
-    private MemberService memberService;
+@RequestMapping("/api/v1/user")
+public class UserController {
+    private final Logger log = LoggerFactory.getLogger(UserController.class);
+    private UserService userService;
 
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @Operation(summary = "Accomodation 숙소 등록",
-            description = "숙소 등록를 등록하는 API입니다.")
+    @Operation(summary = "User 유저 회원가입",
+            description = "유저의 회원가입을 하는 API입니다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "500",description = "서버 내부 오류")})
-    @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public ResponseEntity createMember(@Valid PostMemberDto postMemberDto) {
-        memberService.createMember(postMemberDto);
-        return ResponseEntity.ok().body("Member 생성 성공");
+    @PostMapping("/create")
+    public ResponseEntity createUser(@Valid PostCreateUserDtoReq postCreateUserDtoReq) {
+        PostCreateUserDtoRes response = userService.createUser(postCreateUserDtoReq);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @Operation(summary = "User 유저 조회",
+            description = "유저 ID로 유저 1명을 조회하는 API입니다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공"),
+            @ApiResponse(responseCode = "500",description = "서버 내부 오류")})
+    @GetMapping("/find/{userId}")
+    public ResponseEntity findUserById(@Parameter(description = "조회할 user의 id") @PathVariable Long userId) {
+        log.debug("[user] userId: {}", userId);
+        GetFindUserDtoRes response = userService.findUserById(userId);
+        return ResponseEntity.ok().body(response);
     }
 }

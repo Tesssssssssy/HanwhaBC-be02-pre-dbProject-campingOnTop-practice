@@ -1,14 +1,17 @@
-package com.example.campingontop.model;
+package com.example.campingontop.house.model;
 
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
-import com.example.campingontop.model.enums.hasAirConditioner;
-import com.example.campingontop.model.enums.hasWashingMachine;
-import com.example.campingontop.model.enums.isActive;
+import java.util.Date;
+
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicInsert;
 
 @Entity
@@ -18,7 +21,7 @@ import org.hibernate.annotations.DynamicInsert;
 @AllArgsConstructor
 @Builder
 @DynamicInsert
-public class Accomodation {
+public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,33 +31,54 @@ public class Accomodation {
     @Column(length = 50, nullable = false, unique = true)
     private String name;
 
-    @Column(length = 400, nullable = false)
+    @Column(length = 300, nullable = false)
     private String content;
 
+    @Min(0)
+    @Column(nullable = false)
     private Integer price;
+
+    @Column(length = 200)
     private String img;
 
     @Column(length = 100, nullable = false, unique = true)
     private String address;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 50, nullable = false)
     private String latitude;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 50, nullable = false)
     private String longitude;
 
-    @Max(20)
+    @Min(1)
     private Integer max_user;
 
-    @Enumerated(value = EnumType.STRING)
-    private hasWashingMachine has_WashingMachine;
+    @ColumnDefault("1")
+    @Comment("0: 미보유 | 1: 보유")
+    private Boolean hasWashingMachine;
 
-    @Enumerated(value = EnumType.STRING)
-    private hasAirConditioner has_AirConditioner;
+    @ColumnDefault("1")
+    @Comment("0: 미보유 | 1: 보유")
+    private Boolean hasAirConditioner;
 
-    @ColumnDefault("'ACTIVE")
-    @Enumerated(value = EnumType.STRING)
-    private isActive is_active;
+    @ColumnDefault("1")
+    @Comment("0: 비활성화 | 1: 활성화")
+    private Boolean isActive;
 
-    private LocalDateTime register_time;
+
+    @Column(updatable = false, nullable = false)
+    private Date createdAt;
+
+    private Date updatedAt;
+
+    @PrePersist
+    void createdAt() {
+        this.createdAt = Timestamp.from(Instant.now());
+        this.updatedAt = Timestamp.from(Instant.now());
+    }
+
+    @PreUpdate
+    void updatedAt() {
+        this.updatedAt = Timestamp.from(Instant.now());
+    }
 }

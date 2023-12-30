@@ -1,39 +1,56 @@
-package com.example.campingontop.accomodation.controller;
+package com.example.campingontop.house.controller;
 
-import com.example.campingontop.accomodation.PostAccomodationDto;
-import com.example.campingontop.service.AccomodationService;
+import com.example.campingontop.house.model.request.PostCreateHouseDtoReq;
+import com.example.campingontop.house.model.response.GetFindHouseDtoRes;
+import com.example.campingontop.house.model.response.PostCreateHouseDtoRes;
+import com.example.campingontop.house.service.HouseService;
+import com.example.campingontop.user.model.response.GetFindUserDtoRes;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Tag(name="Accomodation",description = "Accomodation 숙소 CRUD")
-@Slf4j
+@Tag(name="House",description = "House 숙소 CRUD")
 @RestController
-@RequestMapping("/api/v1/accomodation")
-public class AccomodationController {
-    private AccomodationService accomodationService;
+@RequestMapping("/api/v1/house")
+public class HouseController {
+    private final Logger log = LoggerFactory.getLogger(HouseController.class);
+    private HouseService houseService;
 
-    public AccomodationController(AccomodationService accomodationService) {
-        this.accomodationService = accomodationService;
+    public HouseController(HouseService houseService) {
+        this.houseService = houseService;
     }
 
-    @Operation(summary = "Accomodation 숙소 등록",
+    @Operation(summary = "House 숙소 등록",
             description = "숙소 등록를 등록하는 API입니다.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "500",description = "서버 내부 오류")})
-    @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public ResponseEntity createAccomodation(@Valid PostAccomodationDto postAccomodationDto) {
-        accomodationService.createAccomodation(postAccomodationDto);
-        return ResponseEntity.ok().body("Accomodation 생성 성공");
+    @PostMapping("/create")
+    public ResponseEntity createHouse(@Valid PostCreateHouseDtoReq postCreateHouseDtoReq) {
+        PostCreateHouseDtoRes response = houseService.createHouse(postCreateHouseDtoReq);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @Operation(summary = "House 숙소 조회",
+            description = "숙소 ID로 숙소 1개를 조회하는 API입니다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공"),
+            @ApiResponse(responseCode = "500",description = "서버 내부 오류")})
+    @GetMapping("/find/{houseId}")
+    public ResponseEntity findHouseById(@Parameter(description = "조회할 house의 id") @PathVariable Long houseId) {
+        log.debug("[house] houseId: {}", houseId);
+        GetFindHouseDtoRes response = houseService.findHouseById(houseId);
+        return ResponseEntity.ok().body(response);
     }
 
 

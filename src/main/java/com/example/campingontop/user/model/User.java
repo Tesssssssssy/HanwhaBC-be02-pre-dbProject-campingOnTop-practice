@@ -1,12 +1,13 @@
-package com.example.campingontop.model;
+package com.example.campingontop.user.model;
 
-import com.example.campingontop.model.enums.Gender;
-import com.example.campingontop.model.enums.isActive;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -18,14 +19,15 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @DynamicInsert
-public class Member {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(length = 50, nullable = false, unique = true)
     private String email;
-    @Column(length = 50, nullable = false)
+
+    @Column(length = 100, nullable = false)
     private String password;
 
     @Column(length = 30, nullable = false, unique = true)
@@ -34,16 +36,32 @@ public class Member {
     @Column(length = 30, nullable = false, unique = true)
     private String nickName;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, nullable = false, unique = true)
     private String phoneNum;
 
-    @Column(length = 10, nullable = false)
-    private Gender gender;
+    @Comment("0: 비활성화 | 1: 활성화")
+    private Boolean gender;
 
-    @ColumnDefault("'ACTIVE")
-    @Column(length = 10, nullable = false)
-    private isActive is_active;
+    @Column(length = 30)
+    private String birthDay;
 
-    private LocalDate birthday;
-    private LocalDateTime register_time;
+    @ColumnDefault("1")
+    @Comment("0: 비활성화 | 1: 활성화")
+    private Boolean isActive;
+
+    @Column(updatable = false, nullable = false)
+    private Date createdAt;
+
+    private Date updatedAt;
+
+    @PrePersist
+    void createdAt() {
+        this.createdAt = Timestamp.from(Instant.now());
+        this.updatedAt = Timestamp.from(Instant.now());
+    }
+
+    @PreUpdate
+    void updatedAt() {
+        this.updatedAt = Timestamp.from(Instant.now());
+    }
 }
