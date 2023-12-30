@@ -13,6 +13,7 @@ import java.util.Date;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicInsert;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Entity
 @Getter
