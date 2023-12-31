@@ -1,5 +1,6 @@
 package com.example.campingontop.user.model;
 
+import com.example.campingontop.enums.Gender;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
@@ -40,8 +41,9 @@ public class User {
     @Column(length = 50, nullable = false, unique = true)
     private String phoneNum;
 
-    @Comment("0: 비활성화 | 1: 활성화")
-    private Boolean gender;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 50)
+    private Gender gender;
 
     @Column(length = 30)
     private String birthDay;

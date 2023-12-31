@@ -1,5 +1,6 @@
 package com.example.campingontop.user.model.response;
 
+import com.example.campingontop.enums.Gender;
 import com.sun.istack.NotNull;
 import io.swagger.annotations.ApiParam;
 import lombok.*;
@@ -21,7 +22,7 @@ public class PostCreateUserDtoRes {
     private String name;
     private String nickName;
     private String phoneNum;
-    private Boolean gender;
+    private Gender gender;
     private String birthDay;
     private Date createdAt;
 }

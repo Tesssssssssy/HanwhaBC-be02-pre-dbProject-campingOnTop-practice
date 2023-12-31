@@ -10,14 +10,13 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class GetFindUserDtoRes {
+public class PutUpdateUserDtoRes {
     private Long id;
     private String email;
     private String name;
     private String nickName;
     private String phoneNum;
     private Gender gender;
-    private String birthDay;
     private Date createdAt;
     private Date updatedAt;
 }

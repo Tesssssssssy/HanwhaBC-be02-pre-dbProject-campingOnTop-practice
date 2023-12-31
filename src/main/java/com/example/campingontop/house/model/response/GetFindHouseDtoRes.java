@@ -23,7 +23,7 @@ public class GetFindHouseDtoRes {
     private String latitude;
     private String longitude;
 
-    private Integer max_user;
+    private Integer maxUser;
 
     private Boolean hasAirConditioner;
     private Boolean hasWashingMachine;

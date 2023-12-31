@@ -1,20 +1,13 @@
-package com.example.campingontop.house.model.response;
+package com.example.campingontop.house.model.request;
 
 import lombok.*;
-
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PostCreateHouseDtoRes {
-    private Long id;
-
-    // private Integer user_id;
-
+public class PutUpdateHouseDtoReq {
     private String name;
     private String content;
     private Integer price;
@@ -26,8 +19,7 @@ public class PostCreateHouseDtoRes {
 
     private Integer maxUser;
 
+    private Boolean isActive;
     private Boolean hasAirConditioner;
     private Boolean hasWashingMachine;
-
-    private Date createdAt;
 }

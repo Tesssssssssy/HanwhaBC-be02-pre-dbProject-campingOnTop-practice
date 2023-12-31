@@ -52,7 +52,7 @@ public class House {
     private String longitude;
 
     @Min(1)
-    private Integer max_user;
+    private Integer maxUser;
 
     @ColumnDefault("1")
     @Comment("0: 미보유 | 1: 보유")

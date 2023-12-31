@@ -10,7 +10,8 @@ import javax.validation.constraints.Pattern;
 @Setter
 @AllArgsConstructor
 @Builder
-public class PatchUpdateUserDto {
+public class PutUpdateUserDtoReq {
+
     @NotNull
     @Pattern(regexp = "^.*(?=^.{8,15}$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$", message = "특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호")
     @ApiParam(value = "비밀번호", required = true)
@@ -30,10 +31,6 @@ public class PatchUpdateUserDto {
     @ApiParam(value = "핸드폰 번호", required = true, example = "010-1111-2222")
     private String phoneNum;
 
-    @ApiParam(value = "성별", required = true, example = "0: 남성 | 1: 여성")
-    private Boolean gender;
-
-    @Pattern(regexp = "^([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$")
-    @ApiParam(value = "생년월일", example = "2023-12-29")
-    private String birthDay;
+    @ApiParam(value = "성별", required = true, example = "M | F")
+    private String gender;
 }

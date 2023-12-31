@@ -1,4 +1,4 @@
-package com.example.campingontop.house.model.request;
+package com.example.campingontop.house.model.response;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PatchUpdateHouseDtoReq {
+public class PutUpdateHouseDtoRes {
     private Long id;
 
     private String name;
@@ -19,7 +19,7 @@ public class PatchUpdateHouseDtoReq {
     private String latitude;
     private String longitude;
 
-    private Integer max_user;
+    private Integer maxUser;
 
     private Boolean isActive;
     private Boolean hasAirConditioner;

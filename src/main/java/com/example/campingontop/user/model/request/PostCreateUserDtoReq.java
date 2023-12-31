@@ -1,7 +1,9 @@
 package com.example.campingontop.user.model.request;
 
+import com.example.campingontop.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiParam;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,7 +16,6 @@ import java.util.Date;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class PostCreateUserDtoReq {
@@ -42,8 +43,9 @@ public class PostCreateUserDtoReq {
     @ApiParam(value = "핸드폰 번호", required = true, example = "010-1111-2222")
     private String phoneNum;
 
-    @ApiParam(value = "성별", required = true, example = "0: 남성 | 1: 여성")
-    private Boolean gender;
+    @ApiParam(value = "성별", required = true, example = "M | F")
+    private String gender;
+
 
     @Pattern(regexp = "^([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$")
     @ApiParam(value = "생년월일", required = true, example = "2023-12-29")
