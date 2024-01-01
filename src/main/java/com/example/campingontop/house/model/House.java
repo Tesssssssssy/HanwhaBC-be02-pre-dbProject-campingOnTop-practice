@@ -1,5 +1,6 @@
 package com.example.campingontop.house.model;
 
+import com.example.campingontop.house.model.request.PostCreateHouseDtoReq;
 import com.example.campingontop.houseLike.model.HouseLike;
 import lombok.*;
 
@@ -83,5 +84,20 @@ public class House {
     @PreUpdate
     void updatedAt() {
         this.updatedAt = Timestamp.from(Instant.now());
+    }
+
+    public static House toEntity(PostCreateHouseDtoReq req) {
+        return House.builder()
+                .name(req.getName())
+                .content(req.getContent())
+                .price(req.getPrice())
+                .img(req.getImg())
+                .address(req.getAddress())
+                .latitude(req.getLatitude())
+                .longitude(req.getLongitude())
+                .maxUser(req.getMaxUser())
+                .hasAirConditioner(req.getHasAirConditioner())
+                .hasWashingMachine(req.getHasWashingMachine())
+                .build();
     }
 }

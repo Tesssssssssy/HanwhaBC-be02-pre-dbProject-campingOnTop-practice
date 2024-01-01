@@ -26,20 +26,8 @@ public class HouseService {
         this.houseRepository = houseRepository;
     }
 
-    public PostCreateHouseDtoRes createHouse(PostCreateHouseDtoReq postCreateHouseDtoReq) {
-        House house = House.builder()
-                .name(postCreateHouseDtoReq.getName())
-                .content(postCreateHouseDtoReq.getContent())
-                .price(postCreateHouseDtoReq.getPrice())
-                .img(postCreateHouseDtoReq.getImg())
-                .address(postCreateHouseDtoReq.getAddress())
-                .latitude(postCreateHouseDtoReq.getLatitude())
-                .longitude(postCreateHouseDtoReq.getLongitude())
-                .maxUser(postCreateHouseDtoReq.getMaxUser())
-                .hasAirConditioner(postCreateHouseDtoReq.getHasAirConditioner())
-                .hasWashingMachine(postCreateHouseDtoReq.getHasWashingMachine())
-                .build();
-
+    public PostCreateHouseDtoRes createHouse(PostCreateHouseDtoReq request) {
+        House house = House.toEntity(request);
         house = houseRepository.save(house);
 
         PostCreateHouseDtoRes response = PostCreateHouseDtoRes.toDto(house);

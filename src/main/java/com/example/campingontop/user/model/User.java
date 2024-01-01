@@ -2,6 +2,7 @@ package com.example.campingontop.user.model;
 
 import com.example.campingontop.enums.Gender;
 import com.example.campingontop.houseLike.model.HouseLike;
+import com.example.campingontop.user.model.request.PostCreateUserDtoReq;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
@@ -103,5 +104,17 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public static User toEntity(PostCreateUserDtoReq req) {
+        return User.builder()
+                .email(req.getEmail())
+                .password(req.getPassword())
+                .name(req.getName())
+                .nickName(req.getNickName())
+                .phoneNum(req.getPhoneNum())
+                .gender(Gender.fromValue(req.getGender()))
+                .birthDay(req.getBirthDay())
+                .build();
     }
 }

@@ -26,17 +26,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public PostCreateUserDtoRes createUser(PostCreateUserDtoReq req) {
-        User user = User.builder()
-                .email(req.getEmail())
-                .password(req.getPassword())
-                .name(req.getName())
-                .nickName(req.getNickName())
-                .phoneNum(req.getPhoneNum())
-                .gender(Gender.fromValue(req.getGender()))
-                .birthDay(req.getBirthDay())
-                .build();
-
+    public PostCreateUserDtoRes createUser(PostCreateUserDtoReq request) {
+        User user = User.toEntity(request);
         user = userRepository.save(user);
 
         return PostCreateUserDtoRes.toDto(user);
