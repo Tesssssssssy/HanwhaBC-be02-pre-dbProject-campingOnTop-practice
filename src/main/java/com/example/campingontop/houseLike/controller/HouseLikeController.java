@@ -37,7 +37,7 @@ public class HouseLikeController {
             @ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "500",description = "서버 내부 오류")})
     @GetMapping("/{userId}")
-    public ResponseEntity<List<GetUserWithHouseLikeDtoRes>> findHouseLikeByUserId(@PathVariable Long userId) {
+    public ResponseEntity<List<GetUserWithHouseLikeDtoRes>> findHouseLikeByUserId(@Valid @PathVariable Long userId) {
         List<GetUserWithHouseLikeDtoRes> likedHouses = houseLikeService.findHouseLikeByUserId(userId);
         return ResponseEntity.ok().body(likedHouses);
     }

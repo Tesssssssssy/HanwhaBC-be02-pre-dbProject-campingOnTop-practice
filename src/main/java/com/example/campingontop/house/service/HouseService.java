@@ -40,22 +40,9 @@ public class HouseService {
                 .hasWashingMachine(postCreateHouseDtoReq.getHasWashingMachine())
                 .build();
 
-        House result = houseRepository.save(house);
+        house = houseRepository.save(house);
 
-        PostCreateHouseDtoRes response = PostCreateHouseDtoRes.builder()
-                .id(result.getId())
-                .name(result.getName())
-                .content(result.getContent())
-                .price(result.getPrice())
-                .img(result.getImg())
-                .address(result.getAddress())
-                .latitude(result.getLatitude())
-                .longitude(result.getLongitude())
-                .maxUser(result.getMaxUser())
-                .hasAirConditioner(result.getHasAirConditioner())
-                .hasWashingMachine(result.getHasWashingMachine())
-                .createdAt(result.getCreatedAt())
-                .build();
+        PostCreateHouseDtoRes response = PostCreateHouseDtoRes.toDto(house);
 
         return response;
     }
@@ -64,19 +51,7 @@ public class HouseService {
         Optional<House> result = houseRepository.findById(houseId);
         if (result.isPresent()) {
             House house = result.get();
-            GetFindHouseDtoRes res = GetFindHouseDtoRes.builder()
-                    .id(house.getId())
-                    .name(house.getName())
-                    .content(house.getContent())
-                    .price(house.getPrice())
-                    .img(house.getImg())
-                    .address(house.getAddress())
-                    .latitude(house.getLatitude())
-                    .longitude(house.getLongitude())
-                    .maxUser(house.getMaxUser())
-                    .hasAirConditioner(house.getHasAirConditioner())
-                    .hasWashingMachine(house.getHasWashingMachine())
-                    .build();
+            GetFindHouseDtoRes res = GetFindHouseDtoRes.toDto(house);
             return res;
         }
         return null;
@@ -87,19 +62,7 @@ public class HouseService {
         List<GetFindHouseDtoRes> houseList = new ArrayList<>();
 
         for (House house : houses) {
-            GetFindHouseDtoRes res = GetFindHouseDtoRes.builder()
-                    .id(house.getId())
-                    .name(house.getName())
-                    .content(house.getContent())
-                    .price(house.getPrice())
-                    .img(house.getImg())
-                    .address(house.getAddress())
-                    .latitude(house.getLatitude())
-                    .longitude(house.getLongitude())
-                    .maxUser(house.getMaxUser())
-                    .hasAirConditioner(house.getHasAirConditioner())
-                    .hasWashingMachine(house.getHasWashingMachine())
-                    .build();
+            GetFindHouseDtoRes res = GetFindHouseDtoRes.toDto(house);
             houseList.add(res);
         }
         return houseList;
@@ -122,22 +85,9 @@ public class HouseService {
             house.setHasAirConditioner(req.getHasAirConditioner());
             house.setHasWashingMachine(req.getHasWashingMachine());
 
-            houseRepository.save(house);
+            house = houseRepository.save(house);
 
-            PutUpdateHouseDtoRes res = PutUpdateHouseDtoRes.builder()
-                    .id(house.getId())
-                    .name(house.getName())
-                    .content(house.getContent())
-                    .price(house.getPrice())
-                    .img(house.getImg())
-                    .address(house.getAddress())
-                    .latitude(house.getLatitude())
-                    .longitude(house.getLongitude())
-                    .maxUser(house.getMaxUser())
-                    .isActive(house.getIsActive())
-                    .hasAirConditioner(house.getHasAirConditioner())
-                    .hasWashingMachine(house.getHasWashingMachine())
-                    .build();
+            PutUpdateHouseDtoRes res = PutUpdateHouseDtoRes.toDto(house);
             return res;
         }
         return null;

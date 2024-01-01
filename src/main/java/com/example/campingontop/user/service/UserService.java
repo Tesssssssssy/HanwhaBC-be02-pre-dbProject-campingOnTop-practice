@@ -37,38 +37,17 @@ public class UserService {
                 .birthDay(req.getBirthDay())
                 .build();
 
-        User result = userRepository.save(user);
+        user = userRepository.save(user);
 
-        PostCreateUserDtoRes res = PostCreateUserDtoRes.builder()
-                .id(result.getId())
-                .email(result.getEmail())
-                .name(result.getName())
-                .nickName(result.getNickName())
-                .phoneNum(result.getPhoneNum())
-                .gender(result.getGender())
-                .birthDay(result.getBirthDay())
-                .createdAt(result.getCreatedAt())
-                .build();
-
-        return res;
+        return PostCreateUserDtoRes.toDto(user);
     }
 
     public GetFindUserDtoRes findUserById(Long userId) {
         Optional<User> result = userRepository.findById(userId);
         if (result.isPresent()) {
             User user = result.get();
-            GetFindUserDtoRes res = GetFindUserDtoRes.builder()
-                    .id(user.getId())
-                    .email(user.getEmail())
-                    .name(user.getName())
-                    .nickName(user.getNickName())
-                    .phoneNum(user.getPhoneNum())
-                    .gender(user.getGender())
-                    .birthDay(user.getBirthDay())
-                    .createdAt(user.getCreatedAt())
-                    .updatedAt(user.getUpdatedAt())
-                    .build();
-            return res;
+
+            return GetFindUserDtoRes.toDto(user);
         }
         return null;
     }
@@ -78,17 +57,7 @@ public class UserService {
         List<GetFindUserDtoRes> userList = new ArrayList<>();
 
         for (User user : users) {
-            GetFindUserDtoRes res = GetFindUserDtoRes.builder()
-                    .id(user.getId())
-                    .email(user.getEmail())
-                    .name(user.getName())
-                    .nickName(user.getNickName())
-                    .phoneNum(user.getPhoneNum())
-                    .gender(user.getGender())
-                    .birthDay(user.getBirthDay())
-                    .createdAt(user.getCreatedAt())
-                    .updatedAt(user.getUpdatedAt())
-                    .build();
+            GetFindUserDtoRes res = GetFindUserDtoRes.toDto(user);
             userList.add(res);
         }
         return userList;
@@ -105,18 +74,9 @@ public class UserService {
             user.setPhoneNum(req.getPhoneNum());
             user.setGender(Gender.fromValue(req.getGender()));
 
-            userRepository.save(user);
+            user = userRepository.save(user);
 
-            PutUpdateUserDtoRes res = PutUpdateUserDtoRes.builder()
-                    .id(user.getId())
-                    .email(user.getEmail())
-                    .name(user.getName())
-                    .nickName(user.getNickName())
-                    .phoneNum(user.getPhoneNum())
-                    .gender(user.getGender())
-                    .createdAt(user.getCreatedAt())
-                    .updatedAt(user.getUpdatedAt())
-                    .build();
+            PutUpdateUserDtoRes res = PutUpdateUserDtoRes.toDto(user);
             return res;
         }
         return null;

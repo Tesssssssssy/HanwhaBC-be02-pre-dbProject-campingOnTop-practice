@@ -1,6 +1,7 @@
 package com.example.campingontop.user.model.response;
 
 import com.example.campingontop.enums.Gender;
+import com.example.campingontop.user.model.User;
 import lombok.*;
 
 import java.util.Date;
@@ -20,4 +21,18 @@ public class GetFindUserDtoRes {
     private String birthDay;
     private Date createdAt;
     private Date updatedAt;
+
+    public static GetFindUserDtoRes toDto(User user) {
+        return GetFindUserDtoRes.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .name(user.getName())
+                .nickName(user.getNickName())
+                .phoneNum(user.getPhoneNum())
+                .gender(user.getGender())
+                .birthDay(user.getBirthDay())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
+                .build();
+    }
 }

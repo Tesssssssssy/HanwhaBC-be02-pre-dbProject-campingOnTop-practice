@@ -1,5 +1,6 @@
 package com.example.campingontop.house.model.response;
 
+import com.example.campingontop.house.model.House;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -30,4 +31,21 @@ public class PostCreateHouseDtoRes {
     private Boolean hasWashingMachine;
 
     private Date createdAt;
+
+    public static PostCreateHouseDtoRes toDto(House house) {
+        return PostCreateHouseDtoRes.builder()
+                .id(house.getId())
+                .name(house.getName())
+                .content(house.getContent())
+                .price(house.getPrice())
+                .img(house.getImg())
+                .address(house.getAddress())
+                .latitude(house.getLatitude())
+                .longitude(house.getLongitude())
+                .maxUser(house.getMaxUser())
+                .hasAirConditioner(house.getHasAirConditioner())
+                .hasWashingMachine(house.getHasWashingMachine())
+                .createdAt(house.getCreatedAt())
+                .build();
+    }
 }

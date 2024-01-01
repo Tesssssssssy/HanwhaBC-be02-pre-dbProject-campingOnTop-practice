@@ -52,19 +52,7 @@ public class HouseLikeService {
                 User user = houseLike.getUser();
                 House house = houseLike.getHouse();
 
-                GetFindHouseDtoRes houseDto = GetFindHouseDtoRes.builder()
-                        .id(house.getId())
-                        .name(house.getName())
-                        .content(house.getContent())
-                        .price(house.getPrice())
-                        .img(house.getImg())
-                        .address(house.getAddress())
-                        .latitude(house.getLatitude())
-                        .longitude(house.getLongitude())
-                        .maxUser(house.getMaxUser())
-                        .hasAirConditioner(house.getHasAirConditioner())
-                        .hasWashingMachine(house.getHasWashingMachine())
-                        .build();
+                GetFindHouseDtoRes houseDto = GetFindHouseDtoRes.toDto(house);
 
                 GetUserWithHouseLikeDtoRes userDto = GetUserWithHouseLikeDtoRes.builder()
                         .id(houseLike.getId())

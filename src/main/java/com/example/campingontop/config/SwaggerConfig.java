@@ -55,6 +55,17 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .apiInfo(apiInfo());
     }
 
+    @Bean
+    public Docket houseLikeApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("HouseLike")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.example.campingontop.houseLike"))
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(apiInfo());
+    }
+
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Spring Boot Project - campingOnTop")

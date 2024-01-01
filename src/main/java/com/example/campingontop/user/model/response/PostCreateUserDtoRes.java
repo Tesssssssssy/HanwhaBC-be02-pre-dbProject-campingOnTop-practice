@@ -1,6 +1,7 @@
 package com.example.campingontop.user.model.response;
 
 import com.example.campingontop.enums.Gender;
+import com.example.campingontop.user.model.User;
 import com.sun.istack.NotNull;
 import io.swagger.annotations.ApiParam;
 import lombok.*;
@@ -25,4 +26,17 @@ public class PostCreateUserDtoRes {
     private Gender gender;
     private String birthDay;
     private Date createdAt;
+
+    public static PostCreateUserDtoRes toDto(User user) {
+        return PostCreateUserDtoRes.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .name(user.getName())
+                .nickName(user.getNickName())
+                .phoneNum(user.getPhoneNum())
+                .gender(user.getGender())
+                .birthDay(user.getBirthDay())
+                .createdAt(user.getCreatedAt())
+                .build();
+    }
 }

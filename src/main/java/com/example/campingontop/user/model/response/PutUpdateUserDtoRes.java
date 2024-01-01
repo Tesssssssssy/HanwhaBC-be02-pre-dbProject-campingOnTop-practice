@@ -1,6 +1,7 @@
 package com.example.campingontop.user.model.response;
 
 import com.example.campingontop.enums.Gender;
+import com.example.campingontop.user.model.User;
 import lombok.*;
 
 import java.util.Date;
@@ -19,4 +20,17 @@ public class PutUpdateUserDtoRes {
     private Gender gender;
     private Date createdAt;
     private Date updatedAt;
+
+    public static PutUpdateUserDtoRes toDto(User user) {
+        return PutUpdateUserDtoRes.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .name(user.getName())
+                .nickName(user.getNickName())
+                .phoneNum(user.getPhoneNum())
+                .gender(user.getGender())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
+                .build();
+    }
 }
