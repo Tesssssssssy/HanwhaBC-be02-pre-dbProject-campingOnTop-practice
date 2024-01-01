@@ -27,7 +27,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {
-    private final Logger log = LoggerFactory.getLogger(HouseService.class);
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     private UserService userService;
 
     public UserController(UserService userService) {

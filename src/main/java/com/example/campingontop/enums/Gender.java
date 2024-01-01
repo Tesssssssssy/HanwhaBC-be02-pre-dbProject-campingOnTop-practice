@@ -9,6 +9,6 @@ public enum Gender {
                 return gender;
             }
         }
-        throw new IllegalArgumentException("No enum constant for value: " + value);
+        throw new IllegalArgumentException("value에 해당하는 Gender Enum 존재 x: " + value);
     }
 }

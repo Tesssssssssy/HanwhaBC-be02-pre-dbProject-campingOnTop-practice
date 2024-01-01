@@ -26,7 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/house")
 public class HouseController {
-    private final Logger log = LoggerFactory.getLogger(HouseService.class);
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     private HouseService houseService;
 
     public HouseController(HouseService houseService) {
