@@ -5,6 +5,7 @@ import com.example.campingontop.user.model.User;
 import com.example.campingontop.user.model.request.PostCreateUserDtoReq;
 import com.example.campingontop.user.model.request.PutUpdateUserDtoReq;
 import com.example.campingontop.user.model.response.GetFindUserDtoRes;
+import com.example.campingontop.user.model.response.GetUserWithHouseLikeDtoRes;
 import com.example.campingontop.user.model.response.PostCreateUserDtoRes;
 import com.example.campingontop.user.model.response.PutUpdateUserDtoRes;
 import com.example.campingontop.user.repository.UserRepository;
@@ -124,4 +125,5 @@ public class UserService {
     public void deleteUser(Long userId) {
         userRepository.delete(User.builder().id(userId).build());
     }
+
 }

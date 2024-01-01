@@ -1,19 +1,19 @@
 package com.example.campingontop.house.model;
 
+import com.example.campingontop.houseLike.model.HouseLike;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicInsert;
-import springfox.documentation.annotations.ApiIgnore;
 
 @Entity
 @Getter
@@ -66,6 +66,8 @@ public class House {
     @Comment("0: 비활성화 | 1: 활성화")
     private Boolean isActive;
 
+    @OneToMany(mappedBy = "house", fetch = FetchType.LAZY)
+    private List<HouseLike> houseLikes = new ArrayList<>();
 
     @Column(updatable = false, nullable = false)
     private Date createdAt;

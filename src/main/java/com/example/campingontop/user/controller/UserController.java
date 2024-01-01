@@ -4,6 +4,7 @@ import com.example.campingontop.house.service.HouseService;
 import com.example.campingontop.user.model.request.PostCreateUserDtoReq;
 import com.example.campingontop.user.model.request.PutUpdateUserDtoReq;
 import com.example.campingontop.user.model.response.GetFindUserDtoRes;
+import com.example.campingontop.user.model.response.GetUserWithHouseLikeDtoRes;
 import com.example.campingontop.user.model.response.PostCreateUserDtoRes;
 import com.example.campingontop.user.model.response.PutUpdateUserDtoRes;
 import com.example.campingontop.user.service.UserService;
@@ -88,4 +89,6 @@ public class UserController {
         userService.deleteUser(userId);
         return ResponseEntity.ok().body("User delete success");
     }
+
+
 }

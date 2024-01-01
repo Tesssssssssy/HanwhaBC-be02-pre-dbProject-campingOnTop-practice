@@ -1,18 +1,18 @@
 package com.example.campingontop.user.model;
 
 import com.example.campingontop.enums.Gender;
+import com.example.campingontop.houseLike.model.HouseLike;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicInsert;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -51,6 +51,9 @@ public class User {
     @ColumnDefault("1")
     @Comment("0: 비활성화 | 1: 활성화")
     private Boolean isActive;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<HouseLike> houseLikes = new ArrayList<>();
 
     @Column(updatable = false, nullable = false)
     private Date createdAt;
