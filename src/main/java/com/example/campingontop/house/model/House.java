@@ -2,6 +2,7 @@ package com.example.campingontop.house.model;
 
 import com.example.campingontop.house.model.request.PostCreateHouseDtoReq;
 import com.example.campingontop.houseLike.model.HouseLike;
+import com.example.campingontop.utils.ImageUtils;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,8 +28,6 @@ public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    // private Integer user_id;
 
     @Column(length = 50, nullable = false, unique = true)
     private String name;
@@ -86,18 +85,17 @@ public class House {
         this.updatedAt = Timestamp.from(Instant.now());
     }
 
-    public static House toEntity(PostCreateHouseDtoReq req) {
+    public static House toEntity(PostCreateHouseDtoReq request) {
         return House.builder()
-                .name(req.getName())
-                .content(req.getContent())
-                .price(req.getPrice())
-                .img(req.getImg())
-                .address(req.getAddress())
-                .latitude(req.getLatitude())
-                .longitude(req.getLongitude())
-                .maxUser(req.getMaxUser())
-                .hasAirConditioner(req.getHasAirConditioner())
-                .hasWashingMachine(req.getHasWashingMachine())
+                .name(request.getName())
+                .content(request.getContent())
+                .price(request.getPrice())
+                .address(request.getAddress())
+                .latitude(request.getLatitude())
+                .longitude(request.getLongitude())
+                .maxUser(request.getMaxUser())
+                .hasAirConditioner(request.getHasAirConditioner())
+                .hasWashingMachine(request.getHasWashingMachine())
                 .build();
     }
 }

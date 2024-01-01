@@ -1,12 +1,12 @@
 package com.example.campingontop.user.controller;
 
+import com.example.campingontop.house.model.request.PostSetHouseImgDtoReq;
+import com.example.campingontop.house.model.response.PostSetHouseImgDtoRes;
 import com.example.campingontop.house.service.HouseService;
 import com.example.campingontop.user.model.request.PostCreateUserDtoReq;
+import com.example.campingontop.user.model.request.PostSetUserImgDtoReq;
 import com.example.campingontop.user.model.request.PutUpdateUserDtoReq;
-import com.example.campingontop.user.model.response.GetFindUserDtoRes;
-import com.example.campingontop.user.model.response.GetUserWithHouseLikeDtoRes;
-import com.example.campingontop.user.model.response.PostCreateUserDtoRes;
-import com.example.campingontop.user.model.response.PutUpdateUserDtoRes;
+import com.example.campingontop.user.model.response.*;
 import com.example.campingontop.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -77,6 +78,17 @@ public class UserController {
     public ResponseEntity updateUser(@Valid @RequestBody PutUpdateUserDtoReq putUpdateUserDtoReq, @PathVariable Long userId) {
         PutUpdateUserDtoRes user = userService.updateUser(putUpdateUserDtoReq, userId);
         return ResponseEntity.ok().body(user);
+    }
+
+    @Operation(summary = "User 유저 이미지 수정",
+            description = "유저의 이미지를 수정하는 API입니다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공"),
+            @ApiResponse(responseCode = "500",description = "서버 내부 오류")})
+    @PostMapping(value = "/update/img/{userId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity setUserImg(@Valid PostSetUserImgDtoReq request, @PathVariable Long userId) {
+        PostSetUserImgDtoRes house = userService.setUserImg(request, userId);
+        return ResponseEntity.ok().body(house);
     }
 
     @Operation(summary = "User 유저 삭제",

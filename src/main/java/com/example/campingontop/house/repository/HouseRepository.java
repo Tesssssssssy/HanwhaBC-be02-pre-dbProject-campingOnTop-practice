@@ -10,7 +10,4 @@ import java.util.Optional;
 @Repository
 public interface HouseRepository extends JpaRepository<House, Long> {
     public Optional<House> findByName(String name);
-
-    @Override
-    public Optional<House> findById(Long id);
 }

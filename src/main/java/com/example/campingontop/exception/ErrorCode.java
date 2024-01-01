@@ -11,7 +11,7 @@ public enum ErrorCode {
     INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "잘못된 토큰입니다."),
     INVALID_PERMISSION(HttpStatus.UNAUTHORIZED, "권한이 없습니다."),
 
-    PROFILE_IMAGE_EMPTY(HttpStatus.UNAUTHORIZED, "사진을 첨부해주세요."),
+    IMAGE_EMPTY(HttpStatus.UNAUTHORIZED, "사진을 첨부해주세요."),
 
 
     // TODO: 숙소, 페이, 장비 등 추가할 시 발생할 수 있는 에러 코드 추가해야 함.

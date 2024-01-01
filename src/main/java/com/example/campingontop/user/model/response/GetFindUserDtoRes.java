@@ -19,6 +19,7 @@ public class GetFindUserDtoRes {
     private String phoneNum;
     private Gender gender;
     private String birthDay;
+    private String img;
     private Date createdAt;
     private Date updatedAt;
 
@@ -31,6 +32,7 @@ public class GetFindUserDtoRes {
                 .phoneNum(user.getPhoneNum())
                 .gender(user.getGender())
                 .birthDay(user.getBirthDay())
+                .img(user.getImg())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
                 .build();

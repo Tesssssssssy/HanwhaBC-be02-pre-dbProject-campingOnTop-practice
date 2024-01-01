@@ -53,6 +53,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String authority;
 
+    @Column(length = 200)
+    private String img;
+
     @ColumnDefault("1")
     @Comment("0: 비활성화 | 1: 활성화")
     private Boolean isActive;

@@ -17,9 +17,19 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
-  profiles:
-    active: local
-
 logging:
   level:
     org.springframework.security: DEBUG
+
+cloud:
+  aws:
+    s3:
+      bucket: ${AWS_BUCKET_NAME}
+    credentials:
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${AWS_SECRET_KEY}
+    region:
+      static: ${AWS_REGION_NAME}
+      auto: false
+    stack:
+      auto: false

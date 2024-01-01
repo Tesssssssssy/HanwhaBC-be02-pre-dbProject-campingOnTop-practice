@@ -11,7 +11,6 @@ public class PutUpdateHouseDtoReq {
     private String name;
     private String content;
     private Integer price;
-    private String img;
 
     private String address;
     private String latitude;

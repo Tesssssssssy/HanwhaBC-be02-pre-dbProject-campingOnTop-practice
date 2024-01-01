@@ -1,9 +1,11 @@
 package com.example.campingontop.house.controller;
 
 import com.example.campingontop.house.model.request.PostCreateHouseDtoReq;
+import com.example.campingontop.house.model.request.PostSetHouseImgDtoReq;
 import com.example.campingontop.house.model.request.PutUpdateHouseDtoReq;
 import com.example.campingontop.house.model.response.GetFindHouseDtoRes;
 import com.example.campingontop.house.model.response.PostCreateHouseDtoRes;
+import com.example.campingontop.house.model.response.PostSetHouseImgDtoRes;
 import com.example.campingontop.house.model.response.PutUpdateHouseDtoRes;
 import com.example.campingontop.house.service.HouseService;
 import io.swagger.annotations.Api;
@@ -13,8 +15,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,6 +79,17 @@ public class HouseController {
     @PutMapping("/update/{houseId}")
     public ResponseEntity updateHouse(@Valid @RequestBody PutUpdateHouseDtoReq putUpdateHouseDtoReq, @PathVariable Long houseId) {
         PutUpdateHouseDtoRes house = houseService.updateHouse(putUpdateHouseDtoReq, houseId);
+        return ResponseEntity.ok().body(house);
+    }
+
+    @Operation(summary = "House 숙소 이미지 수정",
+            description = "숙소의 이미지를 수정하는 API입니다.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공"),
+            @ApiResponse(responseCode = "500",description = "서버 내부 오류")})
+    @PostMapping(value = "/update/img/{houseId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity setHouseImg(@Valid PostSetHouseImgDtoReq request, @PathVariable Long houseId) {
+        PostSetHouseImgDtoRes house = houseService.setHouseImg(request, houseId);
         return ResponseEntity.ok().body(house);
     }
 

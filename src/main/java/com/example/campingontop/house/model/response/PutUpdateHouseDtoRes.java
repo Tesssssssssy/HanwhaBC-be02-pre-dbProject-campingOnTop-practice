@@ -14,7 +14,6 @@ public class PutUpdateHouseDtoRes {
     private String name;
     private String content;
     private Integer price;
-    private String img;
 
     private String address;
     private String latitude;
@@ -32,7 +31,6 @@ public class PutUpdateHouseDtoRes {
                 .name(house.getName())
                 .content(house.getContent())
                 .price(house.getPrice())
-                .img(house.getImg())
                 .address(house.getAddress())
                 .latitude(house.getLatitude())
                 .longitude(house.getLongitude())

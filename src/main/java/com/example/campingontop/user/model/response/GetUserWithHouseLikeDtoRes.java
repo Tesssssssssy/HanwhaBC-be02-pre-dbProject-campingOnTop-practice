@@ -21,6 +21,7 @@ public class GetUserWithHouseLikeDtoRes {
     private String phoneNum;
     private String gender;
     private String birthDay;
+    private String img;
     private Date createdAt;
     private Date updatedAt;
     private List<GetFindHouseDtoRes> likedHouses;
