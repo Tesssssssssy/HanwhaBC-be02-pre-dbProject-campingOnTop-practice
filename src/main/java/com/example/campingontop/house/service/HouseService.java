@@ -5,10 +5,13 @@ import com.example.campingontop.house.model.request.PostCreateHouseDtoReq;
 import com.example.campingontop.house.model.response.GetFindHouseDtoRes;
 import com.example.campingontop.house.model.response.PostCreateHouseDtoRes;
 import com.example.campingontop.house.repository.HouseRepository;
+import com.example.campingontop.orders.model.PaymentHouses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -74,4 +77,22 @@ public class HouseService {
         }
         return null;
     }
+
+    public Integer getTotalPrice(PaymentHouses datas){
+
+        List<Long> productIds = new ArrayList<>();
+        for (House house: datas.getHouses()) {
+            productIds.add(house.getId());
+        }
+
+        List<House> houses = houseRepository.findAllById(productIds);
+
+        Integer totalPrice = 0;
+        for (House house: houses) {
+            totalPrice += house.getPrice();
+        }
+
+        return  totalPrice;
+    }
+
 }

@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
@@ -20,3 +20,8 @@ spring:
 logging:
   level:
     org.springframework.security: DEBUG
+
+
+imp:
+  imp_key: api_key
+  imp_secret: api_secret

@@ -1,19 +1,19 @@
 package com.example.campingontop.house.model;
 
+import com.example.campingontop.orders.model.OrderProducts;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.DynamicInsert;
-import springfox.documentation.annotations.ApiIgnore;
 
 @Entity
 @Getter
@@ -82,4 +82,10 @@ public class House {
     void updatedAt() {
         this.updatedAt = Timestamp.from(Instant.now());
     }
+
+
+    @OneToMany(mappedBy = "house", fetch = FetchType.LAZY)
+    private List<OrderProducts> orderProductsList = new ArrayList<>();
+
+
 }
