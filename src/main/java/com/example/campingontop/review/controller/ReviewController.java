@@ -2,6 +2,7 @@ package com.example.campingontop.review.controller;
 
 import com.example.campingontop.review.model.Review;
 import com.example.campingontop.review.model.ReviewDTO;
+import com.example.campingontop.review.model.ReviewUpdateDTO;
 import com.example.campingontop.review.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -58,9 +59,10 @@ public class ReviewController {
     }
     // 리뷰 수정
     @PutMapping("/{id}")
-    public Review updateReview(@PathVariable Long id, @RequestBody Review reviewDetails) {
-        return reviewService.updateReview(id, reviewDetails);
+    public Review updateReview(@PathVariable Long id, @ModelAttribute ReviewUpdateDTO reviewUpdateDTO) throws IOException {
+        return reviewService.updateReview(id, reviewUpdateDTO);
     }
+
 
     // 리뷰 삭제
     @DeleteMapping("/{id}")

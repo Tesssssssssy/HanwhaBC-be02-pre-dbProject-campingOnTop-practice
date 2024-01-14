@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.example.campingontop.review.model.Review;
 import com.example.campingontop.review.model.ReviewDTO;
+import com.example.campingontop.review.model.ReviewUpdateDTO;
 import com.example.campingontop.review.repository.ReviewRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,13 +78,18 @@ public class ReviewService {
 
 
     @Transactional
-    public Review updateReview(Long id, Review reviewDetails) {
+    public Review updateReview(Long id, ReviewUpdateDTO reviewUpdateDTO) throws IOException {
         Review review = reviewRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("Review not found"));
 
-        review.setContent(reviewDetails.getContent());
-        review.setRating(reviewDetails.getRating());
-        review.setPostedAt(LocalDateTime.now());
+        review.setContent(reviewUpdateDTO.getContent());
+        review.setRating(reviewUpdateDTO.getRating());
+
+        // 이미지가 제공된 경우, 이미지 업로드 처리
+        if (reviewUpdateDTO.getImage() != null && !reviewUpdateDTO.getImage().isEmpty()) {
+            String imageUrl = uploadImageToS3(reviewUpdateDTO.getImage());
+            review.setImageUrl(imageUrl);
+        }
 
         return reviewRepository.save(review);
     }
