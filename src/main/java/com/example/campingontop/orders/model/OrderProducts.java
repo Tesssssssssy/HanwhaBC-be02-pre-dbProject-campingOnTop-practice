@@ -5,6 +5,8 @@ import com.example.campingontop.house.model.House;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -16,6 +18,10 @@ public class OrderProducts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private LocalDateTime checkInTime;
+    private LocalDateTime checkOutTime;
+    private Timestamp paymentTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Orders_id")

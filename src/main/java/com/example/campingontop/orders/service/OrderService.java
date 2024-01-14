@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -61,19 +62,26 @@ public class OrderService {
         return response;
     }
 
-    public void createOrders(String impUid, PaymentHouses paymentProducts) {
+    public void createOrders(String impUid, PaymentHouses paymentHouses) {
         Orders orders = Orders.builder()
                 .user(User.builder().id(1L).build())
                 .impUid(impUid)
                 .build();
         orders = ordersRepository.save(orders);
 
-        for (House house : paymentProducts.getHouses()) {
-            orderProductsRepository.save(
-                    OrderProducts.builder()
-                            .orders(orders)
-                            .house(house)
-                            .build()
+        for (House house : paymentHouses.getHouses()) {
+            final Orders order = orders;
+
+            orderProductsRepository.saveAll(
+                    house.getOrderProductsList().stream()
+                            .map(orderProduct -> OrderProducts.builder()
+                                    .orders(order)
+                                    .house(orderProduct.getHouse())
+                                    .paymentTime(orderProduct.getPaymentTime())
+                                    .checkInTime(orderProduct.getCheckInTime())
+                                    .checkOutTime(orderProduct.getCheckOutTime())
+                                    .build())
+                            .collect(Collectors.toList())
             );
         }
     }
@@ -142,3 +150,4 @@ public class OrderService {
 
 
 }
+
